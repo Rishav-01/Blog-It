@@ -31,13 +31,6 @@ app.use(cors(corsOpts));
 app.use(cookieParser());
 
 // Custom Middlewares
-app.use("/", async (req, res) => {
-  try {
-    res.status(200).json({ message: "Home page of backend server" });
-  } catch (error) {
-    res.status(500).json({ message: "Error occurred" });
-  }
-});
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/posts", postsRouter);
