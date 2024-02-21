@@ -1,2 +1,2 @@
-export const URL = "http://localhost:3000";
-export const IMAGE_FOLDER = "http://localhost:3000/images/";
+export const URL = "https://blog-it-backend-q4rt.onrender.com";
+export const IMAGE_FOLDER = "https://blog-it-backend-q4rt.onrender.com/images/";

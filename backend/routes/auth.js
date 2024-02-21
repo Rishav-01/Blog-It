@@ -41,7 +41,15 @@ authRouter.post("/login", async (req, res) => {
         }
       );
       const { password, ...info } = user._doc;
-      res.cookie("token", token).status(200).json(info);
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+          maxAge: 3600000 * 5,
+        })
+        .status(200)
+        .json(info);
     }
   } catch (err) {
     console.log(err);
