@@ -11,6 +11,14 @@ import userRouter from "./routes/user.js";
 import postsRouter from "./routes/posts.js";
 import commentsRouter from "./routes/comments.js";
 
+const corsOpts = {
+  origin: true,
+  credentials: true,
+  methods: ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+  exposedHeaders: ["Content-Type"],
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,15 +27,17 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors(corsOpts));
 app.use(cookieParser());
 
 // Custom Middlewares
+app.use("/", async (req, res) => {
+  try {
+    res.status(200).json({ message: "Home page of backend server" });
+  } catch (error) {
+    res.status(500).json({ message: "Error occurred" });
+  }
+});
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/posts", postsRouter);
@@ -46,14 +56,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 app.post("/api/uploads", upload.single("file"), (req, res) => {
-  // console.log(req.body);
   res.status(200).json("Image uploaded successfully");
 });
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT, () =>
+    app.listen(process.env.PORT || 3000, () =>
       console.log(`DB connected and server running on PORT ${process.env.PORT}`)
     );
   })

@@ -27,7 +27,7 @@ authRouter.post("/register", async (req, res) => {
 // Login
 authRouter.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email }).exec();
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(404).json("Email not found.");
     } else if (!bcrypt.compareSync(req.body.password, user.password)) {

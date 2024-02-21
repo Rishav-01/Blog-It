@@ -14,7 +14,6 @@ const Home = () => {
   const [noSearchResults, setNoSearchResults] = useState(false);
   const [loader, setLoader] = useState(false);
   const { user } = useContext(UserContext);
-  // console.log(user);
 
   const fetchPosts = async () => {
     setLoader(true);
@@ -46,18 +45,13 @@ const Home = () => {
           </div>
         ) : !noSearchResults ? (
           posts.map((post, index) => (
-            <>
-              <Link to={user ? `/posts/post/${post._id}` : "/login"}>
-                <HomePosts key={index} post={post} />
-              </Link>
-            </>
+            <Link to={user ? `/posts/post/${post._id}` : "/login"}>
+              <HomePosts key={index} post={post} />
+            </Link>
           ))
         ) : (
           <h3 className="text-center font-bold mt-10">No Posts Available</h3>
         )}
-        {/* <HomePosts />
-        <HomePosts />
-        <HomePosts /> */}
       </div>
       <Footer />
     </>
