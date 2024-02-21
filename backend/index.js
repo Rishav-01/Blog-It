@@ -14,7 +14,7 @@ import commentsRouter from "./routes/comments.js";
 const corsOpts = {
   origin: true,
   credentials: true,
-  methods: ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"],
   exposedHeaders: ["Content-Type"],
 };
@@ -60,3 +60,7 @@ mongoose
     );
   })
   .catch((err) => console.log(err));
+
+app.get("/", (req, res) => {
+  res.json("Connected to backend");
+});
