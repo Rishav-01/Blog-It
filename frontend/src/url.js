@@ -1,2 +1,3 @@
-export const URL = "https://blog-it-backend-q4rt.onrender.com";
-export const IMAGE_FOLDER = "https://blog-it-backend-q4rt.onrender.com/images/";
+export const URL = "https://blog-it-backend-production.up.railway.app";
+export const IMAGE_FOLDER =
+  "https://blog-it-backend-production.up.railway.app/images/";
